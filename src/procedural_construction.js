@@ -55,16 +55,16 @@ function tomato_get_rgb_number(seed){
 function tomato_create_tomato_num_seed(seed){
     let chars =  seed.split('');
     let result = 1;
-    const ONE_BILLION_LIMIT = 1000000000;
+    const ONE_MILLION_LIMIT = 1000000;
 
     chars.forEach(char => {
         let ascci_value = char.charCodeAt(0);
         result = result * ascci_value;
 
-        if(result > ONE_BILLION_LIMIT){
-            result = result % ONE_BILLION_LIMIT;
+        if(result > ONE_MILLION_LIMIT){
+            result = result % ONE_MILLION_LIMIT;
         }
-        
+
     });
 
     return result;
