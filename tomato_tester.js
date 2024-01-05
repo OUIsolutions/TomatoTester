@@ -1,8 +1,8 @@
 
 const TOMATO_MIN_RGB = 50;
-const TOMATO_MAX_RGB = 230;
-const TOMATO_DEFAULT_SEED = 'hello my cold friend';
-const TOMATO_MINIMUM_DIFFERENCE = 100;
+const TOMATO_MAX_RGB = 200;
+const TOMATO_DEFAULT_SEED = 'hello my cold friendd';
+const TOMATO_MINIMUM_DIFFERENCE = 70;
 let tomato_total_generations = 0;
 
 /**
@@ -11,11 +11,16 @@ let tomato_total_generations = 0;
  * */
 function  tomato_get_rgb_pure(seed,total_generation){
 
-    let multiplication = seed * (total_generation + TOMATO_MAX_RGB) * seed;
+    let multiplication = 
+    (seed + total_generation + TOMATO_MAX_RGB)* 
+    (total_generation + TOMATO_MAX_RGB);
+
+
     let result =  multiplication % TOMATO_MAX_RGB;
     if(result < TOMATO_MIN_RGB){
         result = TOMATO_MIN_RGB;
     }
+
     return result;
 }
 
