@@ -30,11 +30,10 @@ function tomato_process_elements(){
 }
 
 
-function tomatto_start(){
+function tomato_start(){
     window.addEventListener('load', ()=>{
-        tomatto_process_elements();
-        //set an  listener for change dimensions
-        const observer = new MutationObserver(tomatto_process_elements);
+        tomato_process_elements();
+        const observer = new MutationObserver(tomato_process_elements);
         const config = { childList: true, subtree: true };
         observer.observe(document.body, config);
     });
