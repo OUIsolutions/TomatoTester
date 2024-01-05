@@ -18,4 +18,7 @@ and them call the **tomato_start** function , with an seed
 # Colors Generation
 The Colors are generated in a procedural way, trying to find pastel colors ,and making the 
 colors became opposite to one to another.
+
 # Modifing attributes
+If you want to modify atrributes of the procedural genrataion , these can be easly done 
+with 
