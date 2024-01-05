@@ -31,7 +31,7 @@ add the source you added or removed inside the python array **SOURCES** located 
 the build.py, than call **python3 build.py** to generate an  new release, that will be saved 
 into **versions** folder.
 All the examples located into **interna/exmples** will be updated, based on the #lib# reference
-located in **interna/exemples_not_linked** 
+located in **internal/exemples_not_linked** 
 
 ## Modifying the Readme 
 the same as build , you can modify the **interna/readme.md** with the text or reference you want to make
