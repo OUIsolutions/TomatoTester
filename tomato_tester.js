@@ -9,8 +9,6 @@ function tomato_random_rgb(){
 
 function tomatto_process_elements(){
     
-
-
     let all_elements = document.body.querySelectorAll('*');
     all_elements.forEach(element => {
         if(element.style){
