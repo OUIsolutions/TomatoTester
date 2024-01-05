@@ -2,44 +2,48 @@
 
 let tomato_total_generations = 0;
 
+/**
+ * @param {number} seed
+ * @param {number}total_generation
+ * */
+function  tomato_get_rgb_pure(seed,total_generation){
+    const MIN_RGB = 0;
+    const MAX_RGB = 230;
+    let multiplication = seed * (total_generation + MAX_RGB) * seed;
+    let result =  multiplication % MAX_RGB;
+}
 
 /**
  * @param {number} seed
  * @return {number}
  */
 function tomato_get_rgb_number(seed){
-    tomato_total_generations+=1;
-    const MAX_RGB = 255;
 
-    //means it's the first generation
-    if(tomato_total_generations === 1){
-        let multiplication = seed * tomato_total_generations ;
-        return  multiplication % MAX_RGB;
-    }
+    let last_rgb =  tomato_get_rgb_pure(seed,tomato_total_generations-1);
 
-
-    let last_multiplication =  seed * (tomato_total_generations -1);
-
-    let last_rgb = last_multiplication % MAX_RGB;
+    console.log("=========================");
+    console.log("last:",last_rgb);
 
     const LIMIT_TRYS = 100;
-    const MININUM_DIFFERENCE = 100;
+    const MININUM_DIFFERENCE = 50;
     let max_try = LIMIT_TRYS + tomato_total_generations;
 
     let rgb = 0;
 
     for(;tomato_total_generations < max_try; tomato_total_generations++){
 
-        let multiplication = seed * tomato_total_generations;
-        rgb = multiplication % MAX_RGB;
+        rgb = tomato_get_rgb_pure(seed,tomato_total_generations);
         let difference = rgb - last_rgb;
         let positive_difference = Math.abs(difference);
+
         if(positive_difference > MININUM_DIFFERENCE){
             break;
         }
-    }
 
-    console.log(rgb)
+    }
+    tomato_total_generations+=1;
+
+    console.log("actual:"+rgb)
 
     return rgb
 
@@ -118,7 +122,7 @@ function tomato_create_tomato_num_seed(seed){
 
 function tomato_start(seed){
 
-    const TOMATO_DEFAULT_SEED = 'ssssssssss';
+    const TOMATO_DEFAULT_SEED = '3231eddaaddd';
     let tomato_numerical_seed = 0;
     if(seed){
         tomato_numerical_seed = tomato_create_tomato_num_seed(seed);
