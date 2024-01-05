@@ -19,7 +19,20 @@ and them call the **tomato_start** function , with an seed
 The Colors are generated in a procedural way, trying to find pastel colors ,and making the 
 colors became opposite to one to another.
 
-# Modifing attributes
+# Modifying attributes
 If you want to modify atrributes of the procedural genrataion , these can be easly done 
 with 
 #ref:modifying.html
+
+# Contribution or Forking
+
+For Contributing on the source code, modify the modifications you want and then
+add the source you added or removed inside the python array **SOURCES** located into 
+the build.py, than call **python3 build.py** to generate an  new release, that will be saved 
+into **versions** folder.
+All the examples located into **interna/exmples** will be updated, based on the #lib# reference
+located in **interna/exemples_not_linked** 
+
+## Modifying the Readme 
+the same as build , you can modify the **interna/readme.md** with the text or reference you want to make
+than, the main **readme,md** will be updated
