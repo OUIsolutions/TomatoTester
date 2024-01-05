@@ -59,7 +59,7 @@ function tomato_create_tomato_num_seed(seed){
 
     chars.forEach(char => {
         let ascci_value = char.charCodeAt(0);
-        result = result * ascci_value;
+        result = (result * ascci_value) + 1;
 
         if(result > ONE_MILLION_LIMIT){
             result = result % ONE_MILLION_LIMIT;
