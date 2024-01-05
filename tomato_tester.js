@@ -1,11 +1,12 @@
 
 const TOMATO_DEFAULT_SEED = 'Qsdaonuninfinr#';
+/**@type {Array<number>} */
 let tomato_nums = [];
 let tomato_char_point = 0;
 let total_generations = 0;
 
 /**
- * @return number
+ * @return {number}
  * */
 function tomato_get_next_num(){
     if(tomato_char_point >= tomato_nums.length){
@@ -24,7 +25,9 @@ function tomato_create_tomato_nums(seed){
     let chars =  seed.split('');
     return chars.map(char => char.charCodeAt(0));
 }
-
+/**
+ * @return {number}
+ */
 function tomato_get_rgb_number(){
     let generated_seed  = 0;
     total_generations+=1;
@@ -39,7 +42,13 @@ function tomato_get_rgb_number(){
 
 
 }
+/**
+ * @typedef {TomatoPseudoRamdomColors}
+ * @property {string} rgb
+ * @property {string} color
+ */
 
+/**@return  {TomatoPseudoRamdomColors}*/
 function tomato_generate_pseudo_random_colors(){
     //determine Math seed
 
