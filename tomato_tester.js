@@ -1,62 +1,33 @@
 
-const TOMATO_DEFAULT_SEED = 'TomatoSeed6';
-/**@type {Array<number>} */
-let tomato_nums = [];
-let tomato_char_point = 0;
-let total_generations = 0;
+
+let tomato_total_generations = 0;
+
 
 /**
- * @return {number}
- * */
-function tomato_get_next_num(){
-    if(tomato_char_point >= tomato_nums.length){
-        tomato_char_point = 0;
-    }
-    let current_num  =  tomato_nums[tomato_char_point];
-    tomato_char_point+=1;
-    return current_num;
-
-}
-/**
- * @param {string} seed
- * @return {Array<number>}
- * */
-function tomato_create_tomato_nums(seed){
-    let chars =  seed.split('');
-    return chars.map(char => char.charCodeAt(0));
-}
-/**
+ * @param {number} seed
  * @return {number}
  */
-function tomato_get_rgb_number(){
-    let generated_seed  = 0;
-    total_generations+=1;
-
-    for(let i =0; i < tomato_nums.length + 1; i++){
-        let current_num = tomato_get_next_num();
-        generated_seed += current_num * total_generations;
-    }
-    
-    //transform generated_seed into an number from 0 to 255
-    return generated_seed % 256;
-
-
+function tomato_get_rgb_number(seed){
+   tomato_total_generations+=1;
+   let multiplication = seed * tomato_total_generations;
+   return multiplication % 255;
 }
 /**
- * @typedef {TomatoPseudoRamdomColors}
+ * @typedef {object} TomatoPseudoRamdomColors
  * @property {string} rgb
  * @property {string} color
  */
 
-/**@return  {TomatoPseudoRamdomColors}*/
-function tomato_generate_pseudo_random_colors(){
+/**
+ * @param {number} seed
+ * @return  {TomatoPseudoRamdomColors}*/
+function tomato_generate_pseudo_random_colors(seed){
     //determine Math seed
+    
 
-    tomato_get_rgb_number();
-
-    let red =  tomato_get_rgb_number();
-    let green = tomato_get_rgb_number();
-    let blue =  tomato_get_rgb_number();
+    let red =  tomato_get_rgb_number(seed);
+    let green = tomato_get_rgb_number(seed);
+    let blue =  tomato_get_rgb_number(seed);
 
 
     let color = 'black';
@@ -71,7 +42,8 @@ function tomato_generate_pseudo_random_colors(){
   
 }
 
-function tomato_process_elements(){
+/**@param {number}seed */
+function tomato_process_elements(seed){
 
     let all_elements = document.body.querySelectorAll('*');
     
@@ -84,7 +56,7 @@ function tomato_process_elements(){
         element.setAttribute('tomato', 'true');
 
         if(element.style){
-            let tomato_colors = tomato_generate_pseudo_random_colors();
+            let tomato_colors = tomato_generate_pseudo_random_colors(seed);
             element.style.backgroundColor = tomato_colors.rgb;
             element.style.color = tomato_colors.color;
         }
@@ -92,19 +64,41 @@ function tomato_process_elements(){
 }
 
 
+/**
+ * @param {string} seed
+ * @return {number}
+ * */
+
+function tomato_create_tomato_num_seed(seed){
+    let chars =  seed.split('');
+    let result = 1;
+    chars.forEach(char => {
+        let ascci_value = char.charCodeAt(0);
+        result = result * ascci_value;
+    });
+
+    const ONE_BILLION_LIMIT = 1000000000;
+    result = result % ONE_BILLION_LIMIT;
+    return result;
+
+}
+
 function tomato_start(seed){
 
-
+    const TOMATO_DEFAULT_SEED = 'TomatoSeed9';
+    let tomato_numerical_seed = 0;
     if(seed){
-        tomato_nums = tomato_create_tomato_nums(seed);
+        tomato_numerical_seed = tomato_create_tomato_num_seed(seed);
     }
     else {
-        tomato_nums = tomato_create_tomato_nums(TOMATO_DEFAULT_SEED);
+        tomato_numerical_seed = tomato_create_tomato_num_seed(TOMATO_DEFAULT_SEED);
     }
 
+
+
     window.addEventListener('load', ()=>{
-        tomato_process_elements();
-        const observer = new MutationObserver(tomato_process_elements);
+        tomato_process_elements(tomato_numerical_seed);
+        const observer = new MutationObserver( ()=>tomato_process_elements(tomato_numerical_seed));
         const config = { childList: true, subtree: true };
         observer.observe(document.body, config);
     });
