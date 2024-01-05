@@ -1,9 +1,9 @@
 
 const TOMATO_DEFAULT_SEED = 'hello my cold friendd';
 
-let  TOMATO_MIN_RGB = 50;
-let  TOMATO_MAX_RGB = 200;
-let  TOMATO_MINIMUM_DIFFERENCE = 70;
+let  tomato_min_rgb = 50;
+let  tomato_max_rgb = 200;
+let  tomato_minimum_difference = 70;
 let tomato_total_generations = 0;
 
 /**
@@ -13,13 +13,13 @@ let tomato_total_generations = 0;
 function  tomato_get_rgb_pure(seed,total_generation){
 
     let multiplication = 
-    (seed + total_generation + TOMATO_MAX_RGB)* 
-    (total_generation + TOMATO_MAX_RGB);
+    (seed + total_generation + tomato_max_rgb)*
+    (total_generation + tomato_max_rgb);
 
 
-    let result =  multiplication % TOMATO_MAX_RGB;
-    if(result < TOMATO_MIN_RGB){
-        result = TOMATO_MIN_RGB;
+    let result =  multiplication % tomato_max_rgb;
+    if(result < tomato_min_rgb){
+        result = tomato_min_rgb;
     }
 
     return result;
@@ -44,7 +44,7 @@ function tomato_get_rgb_number(seed){
         rgb = tomato_get_rgb_pure(seed,tomato_total_generations);
         let difference = rgb - last_rgb;
         let positive_difference = Math.abs(difference);
-        if(positive_difference > TOMATO_MINIMUM_DIFFERENCE){
+        if(positive_difference > tomato_minimum_difference){
             break;
         }
     }
