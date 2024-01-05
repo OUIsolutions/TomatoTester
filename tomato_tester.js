@@ -1,5 +1,5 @@
 
-const TOMATO_DEFAULT_SEED = 'Qsdaonuninfinr#';
+const TOMATO_DEFAULT_SEED = 'TomatoSeed6';
 /**@type {Array<number>} */
 let tomato_nums = [];
 let tomato_char_point = 0;
@@ -75,11 +75,12 @@ function tomato_process_elements(){
 
     let all_elements = document.body.querySelectorAll('*');
     
-    //these is to avoid reprocessing elements
-    let filtered_elements = all_elements.filter(element => element.getAttribute('tomato'));
-    
-    filtered_elements.forEach(element => {
+
+    all_elements.forEach(element => {
         //set the tomato attribute
+        if(element.getAttribute('tomato')){
+            return;
+        }
         element.setAttribute('tomato', 'true');
 
         if(element.style){
