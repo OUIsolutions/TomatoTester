@@ -10,7 +10,7 @@ for run, you just need to pass the cdn script tag into your project
 and them call the **tomato_start** function , with an seed
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.95.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.955.js"></script>
 <script>
     let my_seed = 'hello my cold friend'
     tomato_start(my_seed)
@@ -26,7 +26,7 @@ and them call the **tomato_start** function , with an seed
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tomato Test</title>
-    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.95.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.955.js"></script>
     <script>
         let my_seed = 'hello my cold friend'
         tomato_start(my_seed)
@@ -74,7 +74,7 @@ with
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tomato Test</title>
-    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.95.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.955.js"></script>
     <script>
         let my_seed = 'hello my cold friend'
         //determine min rgb level of each of the 3 colors

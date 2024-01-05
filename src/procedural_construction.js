@@ -36,7 +36,7 @@ function tomato_get_rgb_number(seed){
 
         rgb = tomato_get_rgb_pure(seed,tomato_total_generations);
         let difference = rgb - last_rgb;
-        let positive_difference = Math.abs(difference);
+        let positive_difference = difference *1;
         if(positive_difference > tomato_minimum_difference){
             break;
         }
