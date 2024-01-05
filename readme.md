@@ -67,3 +67,51 @@ colors became opposite to one to another.
 # Modifing attributes
 If you want to modify atrributes of the procedural genrataion , these can be easly done 
 with 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato Test</title>
+    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.95.js"></script>
+    <script>
+        let my_seed = 'hello my cold friend'
+        //determing min rgb level of each of the 3 colors 
+        tomato_min_rgb = 0;
+        //determing max rgb level of each of the 3 colors
+        tomato_max_rgb = 255;
+
+        //determing min difference between 2 colors
+        tomato_minimum_difference = 70;
+        
+        tomato_start(my_seed)
+    </script>
+    <style>
+        .container{
+            width: 70vw;
+            height: 70vh;
+        }
+        .child{
+            width: 30%;
+            height: 30%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="child">
+            <h4>child 1</h4>
+        </div>
+        <div class="child">
+
+            <h4>child 2</h4>
+        </div>
+        <div class="child">
+            <h4>child 3</h4>
+        </div>
+   
+    </div>
+</body>
+</html>
+```

@@ -22,3 +22,4 @@ colors became opposite to one to another.
 # Modifing attributes
 If you want to modify atrributes of the procedural genrataion , these can be easly done 
 with 
+#ref:modifing.html
