@@ -18,7 +18,7 @@ and them call the **tomato_start** function , with an seed
 ```
 
 # Full example
-
+(Runnable Example)[https://ouisolutions.github.io/TomatoTestter/internal/exemples/full.html]
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +66,10 @@ colors became opposite to one to another.
 
 # Modifying attributes
 If you want to modify atrributes of the procedural genrataion , these can be easly done 
-with 
+with
+
+(Runnable Example)[https://ouisolutions.github.io/TomatoTestter/internal/exemples/modifying.html]
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
