@@ -65,6 +65,8 @@ function tomato_generate_pseudo_random_colors(){
 function tomato_process_elements(){
 
     let all_elements = document.body.querySelectorAll('*');
+    
+    //these is to avoid reprocessing elements
     let filtered_elements = all_elements.filter(element => element.getAttribute('tomato'));
     
     filtered_elements.forEach(element => {
