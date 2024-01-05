@@ -1,7 +1,7 @@
 
 const TOMATO_MIN_RGB = 50;
 const TOMATO_MAX_RGB = 230;
-const TOMATO_DEFAULT_SEED = 'ddasdq233';
+const TOMATO_DEFAULT_SEED = 'hello my cold friend';
 const TOMATO_MINIMUM_DIFFERENCE = 100;
 let tomato_total_generations = 0;
 
