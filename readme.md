@@ -25,7 +25,7 @@ and them call the **tomato_start** function , with an seed
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tomato Test</title>
+    <title>Full Generation</title>
     <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.956.js"></script>
     <script>
         let my_seed = 'hello my cold friend'
@@ -73,7 +73,7 @@ with
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tomato Test</title>
+    <title>Modifying Generation</title>
     <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.956.js"></script>
     <script>
         let my_seed = 'hello my cold friend'
