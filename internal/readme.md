@@ -12,7 +12,7 @@ and them call the **tomato_start** function , with an seed
 #ref:script.html
 
 # Full example
-
+(Runnable Example)[https://ouisolutions.github.io/TomatoTestter/internal/exemples/full.html]
 #ref:full.html
 
 # Colors Generation
@@ -21,7 +21,10 @@ colors became opposite to one to another.
 
 # Modifying attributes
 If you want to modify atrributes of the procedural genrataion , these can be easly done 
-with 
+with
+
+(Runnable Example)[https://ouisolutions.github.io/TomatoTestter/internal/exemples/modifying.html]
+
 #ref:modifying.html
 
 # Contribution or Forking
