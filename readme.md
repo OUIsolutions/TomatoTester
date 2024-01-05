@@ -18,7 +18,7 @@ and them call the **tomato_start** function , with an seed
 ```
 
 # Full example
-(Runnable Example)[https://ouisolutions.github.io/TomatoTestter/internal/exemples/full.html]
+[Runnable Example](https://ouisolutions.github.io/TomatoTestter/internal/exemples/full.html)
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +62,7 @@ and them call the **tomato_start** function , with an seed
 
 # Source 
 The source code its located in:
-(Source)[https://github.com/OUIsolutions/TomatoTestter]
+[Source](https://github.com/OUIsolutions/TomatoTestter)
 
 # Colors Generation
 The Colors are generated in a procedural way, trying to find pastel colors ,and making the 
@@ -72,7 +72,7 @@ colors became opposite to one to another.
 If you want to modify atrributes of the procedural genrataion , these can be easly done 
 with
 
-(Runnable Example)[https://ouisolutions.github.io/TomatoTestter/internal/exemples/modifying.html]
+[Runnable Example](https://ouisolutions.github.io/TomatoTestter/internal/exemples/modifying.html)
 
 ```html
 <!DOCTYPE html>
