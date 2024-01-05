@@ -8,9 +8,42 @@ let tomato_total_generations = 0;
  * @return {number}
  */
 function tomato_get_rgb_number(seed){
-   tomato_total_generations+=1;
-   let multiplication = seed * tomato_total_generations;
-   return multiplication % 255;
+    tomato_total_generations+=1;
+    const MAX_RGB = 255;
+
+    //means it's the first generation
+    if(tomato_total_generations === 1){
+        let multiplication = seed * tomato_total_generations ;
+        return  multiplication % MAX_RGB;
+    }
+
+
+    let last_multiplication =  seed * (tomato_total_generations -1);
+
+    let last_rgb = last_multiplication % MAX_RGB;
+
+    const LIMIT_TRYS = 100;
+    const MININUM_DIFFERENCE = 100;
+    let max_try = LIMIT_TRYS + tomato_total_generations;
+
+    let rgb = 0;
+
+    for(;tomato_total_generations < max_try; tomato_total_generations++){
+
+        let multiplication = seed * tomato_total_generations;
+        rgb = multiplication % MAX_RGB;
+        let difference = rgb - last_rgb;
+        let positive_difference = Math.abs(difference);
+        if(positive_difference > MININUM_DIFFERENCE){
+            break;
+        }
+    }
+
+    console.log(rgb)
+
+    return rgb
+
+
 }
 /**
  * @typedef {object} TomatoPseudoRamdomColors
@@ -85,7 +118,7 @@ function tomato_create_tomato_num_seed(seed){
 
 function tomato_start(seed){
 
-    const TOMATO_DEFAULT_SEED = 'TomatoSeed9';
+    const TOMATO_DEFAULT_SEED = 'ssssssssss';
     let tomato_numerical_seed = 0;
     if(seed){
         tomato_numerical_seed = tomato_create_tomato_num_seed(seed);
