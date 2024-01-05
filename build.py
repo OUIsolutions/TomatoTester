@@ -4,7 +4,9 @@ from shutil import rmtree
 from os import makedirs
 
 SOURCES = [
-    'src/tomato_tester.js'
+    'src/globals.js',
+    'src/procedural_construction.js',
+    'src/generation.js',
 ]
 
 LIB_NAME = 'TomatoTestter'

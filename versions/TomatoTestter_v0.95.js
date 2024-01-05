@@ -12,9 +12,9 @@ let tomato_total_generations = 0;
  * */
 function  tomato_get_rgb_pure(seed,total_generation){
 
-    let multiplication = 
-    (seed + total_generation + tomato_max_rgb)*
-    (total_generation + tomato_max_rgb);
+    let multiplication =
+        (seed + total_generation + tomato_max_rgb)*
+        (total_generation + tomato_max_rgb);
 
 
     let result =  multiplication % tomato_max_rgb;
@@ -53,6 +53,26 @@ function tomato_get_rgb_number(seed){
 
 
 }
+
+/**
+ * @param {string} seed
+ * @return {number}
+ * */
+
+function tomato_create_tomato_num_seed(seed){
+    let chars =  seed.split('');
+    let result = 1;
+    chars.forEach(char => {
+        let ascci_value = char.charCodeAt(0);
+        result = result * ascci_value;
+    });
+
+    const ONE_BILLION_LIMIT = 1000000000;
+    result = result % ONE_BILLION_LIMIT;
+    return result;
+
+}
+
 /**
  * @typedef {object} TomatoPseudoRamdomColors
  * @property {string} rgb
@@ -105,24 +125,7 @@ function tomato_process_elements(seed){
 }
 
 
-/**
- * @param {string} seed
- * @return {number}
- * */
 
-function tomato_create_tomato_num_seed(seed){
-    let chars =  seed.split('');
-    let result = 1;
-    chars.forEach(char => {
-        let ascci_value = char.charCodeAt(0);
-        result = result * ascci_value;
-    });
-
-    const ONE_BILLION_LIMIT = 1000000000;
-    result = result % ONE_BILLION_LIMIT;
-    return result;
-
-}
 
 function tomato_start(seed){
 
@@ -144,3 +147,4 @@ function tomato_start(seed){
     });
 
 }
+
