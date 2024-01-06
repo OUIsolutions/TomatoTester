@@ -81,7 +81,7 @@ function tomato_start(props=undefined){
         if(formatted_props.target instanceof  Function){
             formatted_props.target = formatted_props.target();
         }
-        
+
         if(!formatted_props.target){
             formatted_props.target = document.body;
         }
