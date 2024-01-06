@@ -18,10 +18,10 @@
 function tomato_generate_pseudo_random_colors(props,generation){
     //determine Math seed
     generation.total_generations+=1;
-    
-    let red =  tomato_get_rgb_number(seed,0);
-    let green = tomato_get_rgb_number(seed,1);
-    let blue =  tomato_get_rgb_number(seed,2);
+
+    let red =  tomato_get_rgb_number(props,generation,0);
+    let green = tomato_get_rgb_number(props,generation,1);
+    let blue =  tomato_get_rgb_number(props,generation,2);
 
     generation.last_generation = [red,green,blue];
 
@@ -52,7 +52,7 @@ function tomato_process_elements(props,generation){
         element.setAttribute('tomato', 'true');
 
         if(element.style){
-            let tomato_colors = tomato_generate_pseudo_random_colors(seed);
+            let tomato_colors = tomato_generate_pseudo_random_colors(props,generation);
             element.style.backgroundColor = tomato_colors.rgb;
             element.style.color = tomato_colors.color;
         }
