@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/Element-404@main/versions/Element404_v0.5.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@creating-props/versions/TomatoTestter_v0.960.js"></script>
 </head>
 <body>
 <script>
+    let target_div = undefined;
+    function generate_colors(){
+        console.log('chamou');
+        tomato_start()
+    }
+
 
     function main(){
         let target = document.body;
-        let target_div = undefined;
-
         let element = createElement404((main_interface)=>{
             let choices = main_interface.div(()=>{
 
@@ -25,11 +29,13 @@
                 let min_input = main_interface.input({type:"range",min:0,max:255,value:0,step:1});
                 min_input.set_prop('input',(e)=>{
                             min_rgb_text.domElement.innerHTML = "Min Rgb: "+e.value
+                            generate_colors();
                 });
                 let max_rgb_text = main_interface.p("Max Rgb: 255",{inline_style:p_style});
                 let max_input = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
                 max_input.set_prop('input',(e)=>{
-                            max_rgb_text.domElement.innerHTML = "Max Rgb: "+e.value
+                            max_rgb_text.domElement.innerHTML = "Max Rgb: "+e.value;
+                            generate_colors();
                 });
 
 
@@ -37,9 +43,13 @@
                 let difference_input  = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
                 difference_input.set_prop('input',(e)=>{
                             diference_text.domElement.innerHTML = "Difference: "+e.value
+                            generate_colors();
                 });
                 main_interface.p("Seed",{inline_style:p_style});
                 let seed_input = main_interface.input({type:"text",value:"hello my cold friend"});
+                seed_input.set_prop('input',(e)=>{
+                    generate_colors();
+                });
  
             })
             choices.inline_style({
@@ -96,6 +106,8 @@
         },target)
 
         element.render()
+        
+        generate_colors();
 
 
     }
