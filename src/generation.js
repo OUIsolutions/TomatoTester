@@ -68,6 +68,7 @@ function tomato_start(props=undefined){
     let formatted_props = tomato_construct_props(props);
     formatted_props.numerical_seed = tomato_create_tomato_num_seed(formatted_props.seed);
 
+
     /**@type {TomatoGenerationProps}*/
     let generation_props = {
         total_generations:0,
@@ -77,6 +78,10 @@ function tomato_start(props=undefined){
 
     window.addEventListener('load', ()=>{
 
+        if(formatted_props.target instanceof  Function){
+            formatted_props.target = formatted_props.target();
+        }
+        
         if(!formatted_props.target){
             formatted_props.target = document.body;
         }
