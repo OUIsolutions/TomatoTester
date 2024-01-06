@@ -12,8 +12,8 @@ and them call the **tomato_start** function , with an seed
 ```html
 <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.960.js"></script>
 <script>
-    let my_seed = 'hello my cold friend'
-    tomato_start(my_seed)
+
+    tomato_start()
 </script>
 ```
 
@@ -27,10 +27,7 @@ and them call the **tomato_start** function , with an seed
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Generation</title>
     <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.960.js"></script>
-    <script>
-        let my_seed = 'hello my cold friend'
-        tomato_start(my_seed)
-    </script>
+    <script>tomato_start() </script>
     <style>
         .container{
             width: 70vw;
@@ -83,16 +80,17 @@ with
     <title>Modifying Generation</title>
     <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.960.js"></script>
     <script>
-        let my_seed = 'hello my cold friend'
-        //determine min rgb level of each of the 3 colors
-        tomato_min_rgb = 0;
-        //determine max rgb level of each of the 3 colors
-        tomato_max_rgb = 255;
 
-        //determine min difference between 2 colors
-        tomato_minimum_difference = 70;
-        
-        tomato_start(my_seed)
+        let props = {
+            min_rgb:20,
+            max_rgb:255,
+            min_difference:0,
+            target: ()=>document.body,
+            seed:"Hello my Cold Friend"
+        }
+
+        tomato_start(props)
+
     </script>
     <style>
         .container{

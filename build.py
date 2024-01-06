@@ -4,7 +4,8 @@ from shutil import rmtree
 from os import makedirs
 
 SOURCES = [
-    'src/globals.js',
+    'src/default_props.js',
+    'src/props_constructor.js',
     'src/procedural_construction.js',
     'src/generation.js',
 ]

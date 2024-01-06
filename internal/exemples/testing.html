@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/Element-404@main/versions/Element404_v0.5.js"></script>
+</head>
+<body>
+<script>
+
+    function main(){
+        let target = document.body;
+        let element = createElement404((main_interface)=>{
+            main_interface.div(()=>{
+
+                let p_style ={
+                    color:'gray'
+                }
+                
+                let min_rgb_text = main_interface.p("Min Rgb: 0",{inline_style:p_style});
+                let min_input = main_interface.input({type:"range",min:0,max:255,value:0,step:1});
+                min_input.set_prop('input',(e)=>{
+                            min_rgb_text.domElement.innerHTML = "Min Rgb: "+e.value
+                });
+                let max_rgb_text = main_interface.p("Max Rgb: 255",{inline_style:p_style});
+                let max_input = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
+                max_input.set_prop('input',(e)=>{
+                            max_rgb_text.domElement.innerHTML = "Max Rgb: "+e.value
+                });
+
+
+                let diference_text = main_interface.p("Differece: 0",{inline_style:p_style});
+                let difference_input  = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
+                difference_input.set_prop('input',(e)=>{
+                            diference_text.domElement.innerHTML = "Difference: "+e.value
+                });
+                main_interface.p("Seed",{inline_style:p_style});
+                let seed_input = main_interface.input({type:"text",value:"hello my cold friend"});
+ 
+            })
+            
+
+
+        },target)
+
+        element.render()
+    }
+
+    window.addEventListener('load',main);
+</script>
+
+</body>
+</html>
