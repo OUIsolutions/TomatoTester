@@ -11,11 +11,12 @@
 function tomato_generate_pseudo_random_colors(seed){
     //determine Math seed
     
-
-    let red =  tomato_get_rgb_number(seed);
-    let green = tomato_get_rgb_number(seed);
-    let blue =  tomato_get_rgb_number(seed);
-
+    tomato_total_generations+=1;
+    let red =  tomato_get_rgb_number(seed,1);
+    let green = tomato_get_rgb_number(seed,2);
+    let blue =  tomato_get_rgb_number(seed,3);
+    console.log(red + " " + green + " " + blue)
+    tomato_last_generation = [red,green,blue];
 
     let color = 'black';
     if(red + green + blue < 300){
