@@ -12,7 +12,7 @@ SOURCES = [
 
 LIB_NAME = 'TomatoTestter'
 REPO_NAME = 'OUIsolutions/TomatoTestter'
-BRANCH = 'creating-pros'
+BRANCH = 'creating-props'
 
 def create_output():
     output = ''
