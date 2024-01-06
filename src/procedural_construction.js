@@ -7,15 +7,31 @@
  */
 function tomato_get_rgb_number(seed,current_color){
 
-    let multiplication =  seed * current_color  * tomato_total_generations;
+    let multiplication =  seed * (current_color +1) * tomato_total_generations;
+    let pseudo_random_rgb = (multiplication % (tomato_max_rgb - tomato_min_rgb)) + tomato_min_rgb;
 
-    let result = (multiplication % (tomato_max_rgb + tomato_min_rgb));
+    if(!tomato_last_generation){
+        return pseudo_random_rgb;
+    }
+    let last_rgb = tomato_last_generation[current_color];
 
-    if(result < tomato_min_rgb){
-        result = tomato_min_rgb;
+    let MAX_TRYS = 100;
+    for(let i =1; i < MAX_TRYS;i++){
+
+        let difference = Math.abs(pseudo_random_rgb - last_rgb);
+
+        if(difference > tomato_minimum_difference){
+            break;
+        }
+        multiplication =  seed * (current_color +1 + i) * tomato_total_generations;
+        pseudo_random_rgb = (multiplication % (tomato_max_rgb - tomato_min_rgb)) + tomato_min_rgb;
+
+
+
     }
 
-    return result;
+
+    return pseudo_random_rgb;
 
 }
 
