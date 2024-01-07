@@ -10,8 +10,21 @@
 <body>
 <script>
     let target_div = undefined;
+    let min_input = undefined;
+    let max_input = undefined;
+    let difference_input = undefined;
+    let seed_input = undefined;
+    
     function generate_colors(){
-        console.log('chamou');
+    
+        let props = {
+            min_rgb:parseInt(min_input.domElement.value),
+            max_rgb:parseInt(max_input.domElement.value),
+            min_difference:parseInt(difference_input.domElement.value),
+        
+            seed:"Hello my Cold Friend"
+        }
+
         tomato_start()
     }
 
@@ -26,13 +39,13 @@
                 }
                 
                 let min_rgb_text = main_interface.p("Min Rgb: 0",{inline_style:p_style});
-                let min_input = main_interface.input({type:"range",min:0,max:255,value:0,step:1});
+                min_input = main_interface.input({type:"range",min:0,max:255,value:0,step:1});
                 min_input.set_prop('input',(e)=>{
                             min_rgb_text.domElement.innerHTML = "Min Rgb: "+e.value
                             generate_colors();
                 });
                 let max_rgb_text = main_interface.p("Max Rgb: 255",{inline_style:p_style});
-                let max_input = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
+                max_input = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
                 max_input.set_prop('input',(e)=>{
                             max_rgb_text.domElement.innerHTML = "Max Rgb: "+e.value;
                             generate_colors();
@@ -40,13 +53,13 @@
 
 
                 let diference_text = main_interface.p("Differece: 0",{inline_style:p_style});
-                let difference_input  = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
+                difference_input  = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
                 difference_input.set_prop('input',(e)=>{
                             diference_text.domElement.innerHTML = "Difference: "+e.value
                             generate_colors();
                 });
                 main_interface.p("Seed",{inline_style:p_style});
-                let seed_input = main_interface.input({type:"text",value:"hello my cold friend"});
+                seed_input = main_interface.input({type:"text",value:"hello my cold friend"});
                 seed_input.set_prop('input',(e)=>{
                     generate_colors();
                 });
