@@ -75,22 +75,53 @@ function tomato_start(props=undefined){
         total_generations:0,
         last_generation:undefined
     }
-    window.addEventListener('load',()=>{
-                if(formatted_props.target instanceof  Function){
-                    formatted_props.target = formatted_props.target();
+
+    function internal_starter(){
+        if(formatted_props.target instanceof  Function){
+            formatted_props.target = formatted_props.target();
+    }
+    
+    if(!formatted_props.target){
+        formatted_props.target = document.body;
+    }
+
+    tomato_process_elements(formatted_props,generation_props);
+
+    const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
+    const config = { childList: true, subtree: true };
+    observer.observe(document.body, config);
+    }
+    if(!formatted_props.target){
+        formatted_props.target = document.body;
+    }
+    
+    function internal_starter(){
+        tomato_process_elements(formatted_props,generation_props);
+        const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
+        const config = { childList: true, subtree: true };
+        observer.observe(document.body, config);
+    }
+
+    if(formatted_props.target instanceof  Function){
+        let max_tries = 50;
+
+        let interval = setInterval(()=>{
+   
+            formatted_props.target = formatted_props.target();
+            if(formatted_props.target){
+                clearInterval(interval);
+                internal_starter();
             }
             
-            if(!formatted_props.target){
-                formatted_props.target = document.body;
+            max_tries--;
+            if(max_tries < 0){
+                clearInterval(interval);
+                console.log('Tomato could not find the target element');
             }
 
-            tomato_process_elements(formatted_props,generation_props);
+        },100);
 
-            const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
-            const config = { childList: true, subtree: true };
-            observer.observe(document.body, config);
-    })
-
+    }
 
 
 }
