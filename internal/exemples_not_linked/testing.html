@@ -10,7 +10,6 @@
 <body>
     <script>
     let container_target_div = undefined;
-
     let min_input = undefined;
     let max_input = undefined;
     let difference_input = undefined;
@@ -20,44 +19,58 @@
     function render_target_div(){
         
         container_target_div.clear();
-        let created_div = container_target_div.div(()=>{
-            for(let i = 0;i < 20; i++ ){
-                let div = container_target_div.div(()=>{
+        let internal_div = container_target_div.div(()=>{
+                let  created_div = container_target_div.div(()=>{
+                for(let i = 0;i < 30; i++ ){
+                    let div = container_target_div.div(()=>{
 
-                    let internal_div = container_target_div.div();
-                    internal_div.inline_style({
-                        'margin-left':'33%',
-                        'margin-top':'33%',
-                        'width':'30%',
-                        'height':'30%',
-                        'background-color':'blue'
-                    });
+                        let internal_div = container_target_div.div();
+                        internal_div.inline_style({
+                            'margin-left':'33%',
+                            'margin-top':'33%',
+                            'width':'30%',
+                            'height':'30%',
+                            'background-color':'blue'
+                        });
 
-                })
-                div.inline_style({
-                    'width':'20vh',
-                    'height':'20vh',
-                    'margin':'2vh',
-                    'background-color':'red',
-                })
-            }
+                    })
+                    div.inline_style({
+                        'width':'20vh',
+                        'height':'20vh',
+                        'margin':'2vh',
+                        'background-color':'red',
+                    })
+                }
 
 
-        })
-        created_div.inline_style({
-        display:'flex',
-        'flex-wrap':'wrap',
-        'width':'100%',
-        'height':'100%',
-        })
+            })
+            created_div.inline_style({
+            display:'flex',
+            'flex-wrap':'wrap'
+            
+            })
+        });
 
-        container_target_div.inline_style({
-                    position:'absolute',
+        internal_div.outline_style({
+            position:'absolute',
+            horizontal:{
+                    media:'screen and (orientation: landscape)',
+    
                     top:'0px',
                     left:'25%',
                     width:'75%',
                     height:'100%',
+            },
+
+            vertical:{
+                    media:'screen and (orientation: portrait)',
+                    top:'40%',
+                    left:'0px',
+                    width:'100%',
+                    height:'100%',
+            }
         })
+
 
     }
 
@@ -79,6 +92,8 @@
         let target = document.body;
         let element = createElement404((main_interface)=>{
             let choices = main_interface.div(()=>{
+                
+            
 
                 let p_style ={
                     color:'gray'
@@ -111,12 +126,27 @@
                 });
  
             })
-            choices.inline_style({
-                position:'absolute',
-                top:'0px',
-                left:'5%',
-                width:'25%',
-                height:'100%',
+            
+            
+            choices.outline_style({
+                horizontal:{
+
+                    media:'screen and (orientation: landscape)',
+                    position:'absolute',
+                    top:'0px',
+                    left:'5%',
+                    width:'25%',
+                    height:'100%',
+                },
+
+                vertical:{
+                    media:'screen and (orientation: portrait)',
+                    position:'absolute',
+                    top:'0px',
+                    left:'0px',
+                    width:'100%',
+                    height:'40%',
+                }
             })
 
             container_target_div = main_interface.div();
