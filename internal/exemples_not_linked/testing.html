@@ -34,19 +34,30 @@
                         });
 
                     })
-                    div.inline_style({
-                        'width':'20vh',
-                        'height':'20vh',
-                        'margin':'2vh',
-                        'background-color':'red',
+                    div.outline_style({
+                        horizontal:{
+                            media:'screen and (orientation: landscape)',
+                            'width':'20vh',
+                            'height':'20vh',
+                            'margin':'2vh',
+                            'background-color':'red',
+                        },
+                        vertical:{
+                            media:'screen and (max-width: 600px)',
+                            'width':'10vh',
+                            'height':'10vh',
+                            'margin':'2vh',
+                            'background-color':'red',
+                        }
+
                     })
                 }
 
 
             })
             created_div.inline_style({
-            display:'flex',
-            'flex-wrap':'wrap'
+                display:'flex',
+                'flex-wrap':'wrap'
             
             })
         });
@@ -63,7 +74,7 @@
             },
 
             vertical:{
-                    media:'screen and (orientation: portrait)',
+                media:'screen and (max-width: 600px)',
                     top:'25%',
                     left:'0px',
                     width:'100%',
@@ -130,7 +141,7 @@
                 rest_div.outline_style({
       
                     vertical:{
-                        media:'screen and (orientation: portrait)',
+                        media:'screen and (max-width: 600px)',
                         position:'absolute',
                         top:'0px',
                         left:'40%',
@@ -152,7 +163,8 @@
                 },
 
                 vertical:{
-                    media:'screen and (orientation: portrait)',
+                    media:'screen and (max-width: 600px)',
+                    media:'screen ',
                     position:'absolute',
                     top:'0px',
                     left:'0px',
