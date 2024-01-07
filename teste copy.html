@@ -3,21 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifying Generation</title>
-    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@main/versions/TomatoTestter_v0.965.js"></script>
-    <script>
-
-        let props = {
-            min_rgb:20,
-            max_rgb:255,
-            min_difference:0,
-            target: ()=>document.body,
-            seed:"Hello my Cold Friend"
-        }
-
-        tomato_start(props)
-
-    </script>
+    <title>Full Generation</title>
+    <script src="src/default_props.js"></script>
+    <script src="src/props_constructor.js"></script>
+    <script src="src/procedural_construction.js"></script>
+    <script src="src/generation.js"></script>
+    <script>tomato_start() </script>
     <style>
         .container{
             width: 70vw;
