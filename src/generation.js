@@ -82,7 +82,7 @@ function tomato_start(props=undefined){
     }
 
 
-    
+
     function internal_starter(){
         tomato_process_elements(formatted_props,generation_props);
         const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));

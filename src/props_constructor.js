@@ -16,7 +16,7 @@ function get_value_or_default(value,default_value){
  * @typedef {object} TomatoProps
  * @property {string=undefined} seed
  * @property {number} numerical_seed
- * @property {HTMLElement} target
+ * @property {HTMLElement || function} target
  * @property {number=undefined} min_rgb
  * @property {number=undefined} max_rgb
  * @property {number=undefined} min_difference

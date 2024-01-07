@@ -22,7 +22,7 @@ function get_value_or_default(value,default_value){
  * @typedef {object} TomatoProps
  * @property {string=undefined} seed
  * @property {number} numerical_seed
- * @property {HTMLElement} target
+ * @property {HTMLElement || function} target
  * @property {number=undefined} min_rgb
  * @property {number=undefined} max_rgb
  * @property {number=undefined} min_difference
@@ -177,23 +177,50 @@ function tomato_start(props=undefined){
     let generation_props = {
         total_generations:0,
         last_generation:undefined
+    };
+
+
+    if(!formatted_props.target){
+        formatted_props.target = ()=>document.body;
     }
-    window.addEventListener('load',()=>{
-                if(formatted_props.target instanceof  Function){
-                    formatted_props.target = formatted_props.target();
+
+
+
+    function internal_starter(){
+        tomato_process_elements(formatted_props,generation_props);
+        const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
+        const config = { childList: true, subtree: true };
+        observer.observe(document.body, config);
+    }
+
+    if(formatted_props.target instanceof  Function){
+        let max_tries = 50;
+        let interval = setInterval(()=>{
+            
+            try{
+                formatted_props.target = formatted_props.target();
             }
             
-            if(!formatted_props.target){
-                formatted_props.target = document.body;
+            catch(e){
+                console.log(e);
+                clearInterval(interval);
             }
 
-            tomato_process_elements(formatted_props,generation_props);
 
-            const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
-            const config = { childList: true, subtree: true };
-            observer.observe(document.body, config);
-    })
+            if(formatted_props.target){
+                clearInterval(interval);
+                internal_starter();
+            }
+            
+            max_tries--;
+            if(max_tries < 0){
+                clearInterval(interval);
+                console.log('Tomato could not find the target element');
+            }
 
+        },100);
+
+    }
 
 
 }
