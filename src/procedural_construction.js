@@ -52,7 +52,6 @@ function tomato_create_tomato_num_seed(seed){
         result = (result + mul_result);
     
     });
-    console.log('tomato_create_tomato_num_seed',result);
     return result;
 
 }
