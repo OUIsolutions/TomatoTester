@@ -45,18 +45,14 @@ function tomato_get_rgb_number(props,generation,current_color){
 function tomato_create_tomato_num_seed(seed){
     let chars =  seed.split('');
     let result = 1;
-    const ONE_MILLION_LIMIT = 1000000;
 
     chars.forEach(char => {
         let ascci_value = char.charCodeAt(0);
-        result = (result * ascci_value) + 1;
-
-        if(result > ONE_MILLION_LIMIT){
-            result = result % ONE_MILLION_LIMIT;
-        }
-
+        let mul_result = ascci_value * ascci_value;
+        result = (result + mul_result);
+    
     });
-
+    console.log('tomato_create_tomato_num_seed',result);
     return result;
 
 }
