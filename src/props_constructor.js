@@ -34,7 +34,7 @@ function tomato_construct_props(element){
     props.seed = get_value_or_default(props.seed,TOMATO_DEFAULT_SEED);
     props.min_rgb = get_value_or_default(props.min_rgb,TOMATO_MIN_RGB);
     props.max_rgb = get_value_or_default(props.max_rgb,TOMATO_MAX_RGB);
-    props.min_difference = get_value_or_default(props.min_difference,TOMATO_MAX_DIFFERENCE);
+    props.min_difference = get_value_or_default(props.min_difference,TOMATO_MIN_DIFFERENCE);
 
     return  props;
 }
