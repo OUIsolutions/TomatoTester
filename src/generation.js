@@ -47,7 +47,6 @@ function tomato_process_elements(props,generation){
     all_elements.forEach(element => {
         //set the tomato attribute
 
-
         if(element.getAttribute('tomato')){
             return;
         }
@@ -67,7 +66,9 @@ function tomato_process_elements(props,generation){
  * @param {TomatoProps} props
  * */
 function tomato_start(props=undefined){
+
     let formatted_props = tomato_construct_props(props);
+
     formatted_props.numerical_seed = tomato_create_tomato_num_seed(formatted_props.seed);
     /**@type {TomatoGenerationProps}*/
     let generation_props = {
@@ -78,16 +79,16 @@ function tomato_start(props=undefined){
 
     if(formatted_props.target instanceof  Function){
             formatted_props.target = formatted_props.target();
-        }
+    }
+     
+    if(!formatted_props.target){
+        formatted_props.target = document.body;
+    }
 
-        if(!formatted_props.target){
-            formatted_props.target = document.body;
-        }
+    tomato_process_elements(formatted_props,generation_props);
 
-        tomato_process_elements(formatted_props,generation_props);
-
-        const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
-        const config = { childList: true, subtree: true };
-        observer.observe(document.body, config);
+    const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
+    const config = { childList: true, subtree: true };
+    observer.observe(document.body, config);
 
 }
