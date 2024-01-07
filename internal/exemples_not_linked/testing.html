@@ -64,7 +64,7 @@
 
             vertical:{
                     media:'screen and (orientation: portrait)',
-                    top:'40%',
+                    top:'25%',
                     left:'0px',
                     width:'100%',
                     height:'100%',
@@ -105,6 +105,7 @@
                             min_rgb_text.domElement.innerHTML = "Min Rgb: "+e.value
                             generate_colors();
                 });
+
                 let max_rgb_text = main_interface.p("Max Rgb: " + TOMATO_MAX_RGB,{inline_style:p_style});
                 max_input = main_interface.input({type:"range",min:0,max:255,value:TOMATO_MAX_RGB,step:1});
                 max_input.set_prop('input',(e)=>{
@@ -112,18 +113,29 @@
                             generate_colors();
                 });
 
+                let rest_div = main_interface.div(()=>{
+                    let diference_text = main_interface.p("Min Differece: " + TOMATO_MIN_DIFFERENCE,{inline_style:p_style});
+                    difference_input  = main_interface.input({type:"range",min:0,max:255,value:TOMATO_MIN_DIFFERENCE,step:1});
+                    difference_input.set_prop('input',(e)=>{
+                                diference_text.domElement.innerHTML = "Min Differece: "+e.value
+                                generate_colors();
+                    });
+                    main_interface.p("Seed",{inline_style:p_style});
+                    seed_input = main_interface.input({type:"text",value:TOMATO_DEFAULT_SEED});
+                    seed_input.set_prop('change',(e)=>{
+                        generate_colors();
+                    });
+                });
 
-                let diference_text = main_interface.p("Min Differece: " + TOMATO_MIN_DIFFERENCE,{inline_style:p_style});
-                difference_input  = main_interface.input({type:"range",min:0,max:255,value:TOMATO_MIN_DIFFERENCE,step:1});
-                difference_input.set_prop('input',(e)=>{
-                            diference_text.domElement.innerHTML = "Min Differece: "+e.value
-                            generate_colors();
-                });
-                main_interface.p("Seed",{inline_style:p_style});
-                seed_input = main_interface.input({type:"text",value:TOMATO_DEFAULT_SEED});
-                seed_input.set_prop('change',(e)=>{
-                    generate_colors();
-                });
+                rest_div.outline_style({
+      
+                    vertical:{
+                        media:'screen and (orientation: portrait)',
+                        position:'absolute',
+                        top:'0px',
+                        left:'40%',
+                    }
+                })
  
             })
             
@@ -145,7 +157,7 @@
                     top:'0px',
                     left:'0px',
                     width:'100%',
-                    height:'40%',
+                    height:'25%',
                 }
             })
 
