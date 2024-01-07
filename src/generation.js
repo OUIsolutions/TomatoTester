@@ -92,7 +92,7 @@ function tomato_start(props=undefined){
     observer.observe(document.body, config);
     }
     if(!formatted_props.target){
-        formatted_props.target = document.body;
+        formatted_props.target = ()=>document.body;
     }
     
     function internal_starter(){
