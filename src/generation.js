@@ -6,17 +6,24 @@
  */
 
 /**
- * @param {number} seed
- * @return  {TomatoPseudoRamdomColors}*/
-function tomato_generate_pseudo_random_colors(seed){
-    //determine Math seed
-    
-    tomato_total_generations+=1;
-    let red =  tomato_get_rgb_number(seed,0);
-    let green = tomato_get_rgb_number(seed,1);
-    let blue =  tomato_get_rgb_number(seed,2);
+ * @typedef {object} TomatoGenerationProps
+ * @property {number} total_generations
+ * @property {Array<number>} last_generation
+ * */
 
-    tomato_last_generation = [red,green,blue];
+/**
+ * @param {TomatoProps} props
+ * @param {TomatoGenerationProps} generation
+ * @return  {TomatoPseudoRamdomColors}*/
+function tomato_generate_pseudo_random_colors(props,generation){
+    //determine Math seed
+    generation.total_generations+=1;
+
+    let red =  tomato_get_rgb_number(props,generation,0);
+    let green = tomato_get_rgb_number(props,generation,1);
+    let blue =  tomato_get_rgb_number(props,generation,2);
+
+    generation.last_generation = [red,green,blue];
 
     let color = 'black';
     if(red + green + blue < 300){
@@ -30,21 +37,23 @@ function tomato_generate_pseudo_random_colors(seed){
   
 }
 
-/**@param {number}seed */
-function tomato_process_elements(seed){
+/**@param {TomatoProps}props
+ * @param {TomatoGenerationProps} generation
+ * */
+function tomato_process_elements(props,generation){
 
-    let all_elements = document.body.querySelectorAll('*');
-    
+    let all_elements = props.target.querySelectorAll('*');
 
     all_elements.forEach(element => {
         //set the tomato attribute
+
         if(element.getAttribute('tomato')){
             return;
         }
         element.setAttribute('tomato', 'true');
 
         if(element.style){
-            let tomato_colors = tomato_generate_pseudo_random_colors(seed);
+            let tomato_colors = tomato_generate_pseudo_random_colors(props,generation);
             element.style.backgroundColor = tomato_colors.rgb;
             element.style.color = tomato_colors.color;
         }
@@ -53,24 +62,33 @@ function tomato_process_elements(seed){
 
 
 
+/**
+ * @param {TomatoProps} props
+ * */
+function tomato_start(props=undefined){
 
-function tomato_start(seed){
+    let formatted_props = tomato_construct_props(props);
 
-    let tomato_numerical_seed = 0;
-    if(seed){
-        tomato_numerical_seed = tomato_create_tomato_num_seed(seed);
+    formatted_props.numerical_seed = tomato_create_tomato_num_seed(formatted_props.seed);
+    /**@type {TomatoGenerationProps}*/
+    let generation_props = {
+        total_generations:0,
+        last_generation:undefined
     }
-    else {
-        tomato_numerical_seed = tomato_create_tomato_num_seed(TOMATO_DEFAULT_SEED);
+
+
+    if(formatted_props.target instanceof  Function){
+            formatted_props.target = formatted_props.target();
+    }
+     
+    if(!formatted_props.target){
+        formatted_props.target = document.body;
     }
 
+    tomato_process_elements(formatted_props,generation_props);
 
-
-    window.addEventListener('load', ()=>{
-        tomato_process_elements(tomato_numerical_seed);
-        const observer = new MutationObserver( ()=>tomato_process_elements(tomato_numerical_seed));
-        const config = { childList: true, subtree: true };
-        observer.observe(document.body, config);
-    });
+    const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
+    const config = { childList: true, subtree: true };
+    observer.observe(document.body, config);
 
 }

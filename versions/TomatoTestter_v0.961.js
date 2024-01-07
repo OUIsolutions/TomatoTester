@@ -1,39 +1,80 @@
 
 const TOMATO_DEFAULT_SEED = 'hello my cold friend';
-let tomato_last_generation = undefined;
-let  tomato_min_rgb = 60;
-let  tomato_max_rgb = 220;
-let  tomato_minimum_difference = 50;
-let tomato_total_generations = 0;
+const  TOMATO_MIN_RGB = 60;
+const  TOMATO_MAX_RGB = 220;
+const  TOMATO_MIN_DIFFERENCE = 50;
 
 
 /**
- * @param {number} seed
+ * @param {any} value
+ * @param {any} default_value
+ * @return {any}
+ * */
+
+function get_value_or_default(value,default_value){
+    if(value !== undefined &&  value !== null){
+        return value;
+    }
+    return  default_value;
+}
+
+/**
+ * @typedef {object} TomatoProps
+ * @property {string=undefined} seed
+ * @property {number} numerical_seed
+ * @property {HTMLElement} target
+ * @property {number=undefined} min_rgb
+ * @property {number=undefined} max_rgb
+ * @property {number=undefined} min_difference
+ **/
+
+
+
+/**
+ * @param {object || undefined || null} element
+ * @returns {TomatoProps}
+ * */
+function tomato_construct_props(element){
+    /**@type {TomatoProps}*/
+    let props = get_value_or_default(element,{});
+    props.seed = get_value_or_default(props.seed,TOMATO_DEFAULT_SEED);
+    props.min_rgb = get_value_or_default(props.min_rgb,TOMATO_MIN_RGB);
+    props.max_rgb = get_value_or_default(props.max_rgb,TOMATO_MAX_RGB);
+    props.min_difference = get_value_or_default(props.min_difference,TOMATO_MIN_DIFFERENCE);
+
+    return  props;
+}
+
+
+/**
+ * @param {TomatoProps} props
+ * @param {TomatoGenerationProps} generation
  * @param {number} current_color
  * @return {number}
  */
-function tomato_get_rgb_number(seed,current_color){
+function tomato_get_rgb_number(props,generation,current_color){
 
-    let multiplication =  seed * (current_color +1) * tomato_total_generations;
-    let pseudo_random_rgb = (multiplication % (tomato_max_rgb - tomato_min_rgb)) + tomato_min_rgb;
 
-    if(!tomato_last_generation){
+    let multiplication =  props.numerical_seed * (current_color +1) * generation.total_generations;
+    let pseudo_random_rgb = (multiplication % (props.max_rgb - props.min_rgb)) + props.min_rgb;
+
+    if(!generation.last_generation){
         return pseudo_random_rgb;
     }
-    let last_rgb = tomato_last_generation[current_color];
+
+    let last_rgb = generation.last_generation[current_color];
+
 
     let MAX_TRYS = 100;
     for(let i =1; i < MAX_TRYS;i++){
 
         let difference = Math.abs(pseudo_random_rgb - last_rgb);
 
-        if(difference > tomato_minimum_difference){
+        if(difference > props.min_difference){
             break;
         }
-        multiplication =  seed * (current_color +1 + i) * tomato_total_generations;
-        pseudo_random_rgb = (multiplication % (tomato_max_rgb - tomato_min_rgb)) + tomato_min_rgb;
-
-
+        multiplication =  props.numerical_seed * (current_color +1 + i) * generation.total_generations;
+        pseudo_random_rgb = (multiplication % (props.max_rgb - props.min_rgb)) + props.min_rgb;
 
     }
 
@@ -50,18 +91,14 @@ function tomato_get_rgb_number(seed,current_color){
 function tomato_create_tomato_num_seed(seed){
     let chars =  seed.split('');
     let result = 1;
-    const ONE_MILLION_LIMIT = 1000000;
 
     chars.forEach(char => {
         let ascci_value = char.charCodeAt(0);
-        result = (result * ascci_value) + 1;
-
-        if(result > ONE_MILLION_LIMIT){
-            result = result % ONE_MILLION_LIMIT;
-        }
-
+        let mul_result = ascci_value * ascci_value;
+        result = (result + mul_result);
+    
     });
-
+    console.log('tomato_create_tomato_num_seed',result);
     return result;
 
 }
@@ -73,17 +110,24 @@ function tomato_create_tomato_num_seed(seed){
  */
 
 /**
- * @param {number} seed
- * @return  {TomatoPseudoRamdomColors}*/
-function tomato_generate_pseudo_random_colors(seed){
-    //determine Math seed
-    
-    tomato_total_generations+=1;
-    let red =  tomato_get_rgb_number(seed,0);
-    let green = tomato_get_rgb_number(seed,1);
-    let blue =  tomato_get_rgb_number(seed,2);
+ * @typedef {object} TomatoGenerationProps
+ * @property {number} total_generations
+ * @property {Array<number>} last_generation
+ * */
 
-    tomato_last_generation = [red,green,blue];
+/**
+ * @param {TomatoProps} props
+ * @param {TomatoGenerationProps} generation
+ * @return  {TomatoPseudoRamdomColors}*/
+function tomato_generate_pseudo_random_colors(props,generation){
+    //determine Math seed
+    generation.total_generations+=1;
+
+    let red =  tomato_get_rgb_number(props,generation,0);
+    let green = tomato_get_rgb_number(props,generation,1);
+    let blue =  tomato_get_rgb_number(props,generation,2);
+
+    generation.last_generation = [red,green,blue];
 
     let color = 'black';
     if(red + green + blue < 300){
@@ -97,21 +141,23 @@ function tomato_generate_pseudo_random_colors(seed){
   
 }
 
-/**@param {number}seed */
-function tomato_process_elements(seed){
+/**@param {TomatoProps}props
+ * @param {TomatoGenerationProps} generation
+ * */
+function tomato_process_elements(props,generation){
 
-    let all_elements = document.body.querySelectorAll('*');
-    
+    let all_elements = props.target.querySelectorAll('*');
 
     all_elements.forEach(element => {
         //set the tomato attribute
+
         if(element.getAttribute('tomato')){
             return;
         }
         element.setAttribute('tomato', 'true');
 
         if(element.style){
-            let tomato_colors = tomato_generate_pseudo_random_colors(seed);
+            let tomato_colors = tomato_generate_pseudo_random_colors(props,generation);
             element.style.backgroundColor = tomato_colors.rgb;
             element.style.color = tomato_colors.color;
         }
@@ -120,25 +166,34 @@ function tomato_process_elements(seed){
 
 
 
+/**
+ * @param {TomatoProps} props
+ * */
+function tomato_start(props=undefined){
 
-function tomato_start(seed){
+    let formatted_props = tomato_construct_props(props);
 
-    let tomato_numerical_seed = 0;
-    if(seed){
-        tomato_numerical_seed = tomato_create_tomato_num_seed(seed);
+    formatted_props.numerical_seed = tomato_create_tomato_num_seed(formatted_props.seed);
+    /**@type {TomatoGenerationProps}*/
+    let generation_props = {
+        total_generations:0,
+        last_generation:undefined
     }
-    else {
-        tomato_numerical_seed = tomato_create_tomato_num_seed(TOMATO_DEFAULT_SEED);
+
+
+    if(formatted_props.target instanceof  Function){
+            formatted_props.target = formatted_props.target();
+    }
+     
+    if(!formatted_props.target){
+        formatted_props.target = document.body;
     }
 
+    tomato_process_elements(formatted_props,generation_props);
 
-
-    window.addEventListener('load', ()=>{
-        tomato_process_elements(tomato_numerical_seed);
-        const observer = new MutationObserver( ()=>tomato_process_elements(tomato_numerical_seed));
-        const config = { childList: true, subtree: true };
-        observer.observe(document.body, config);
-    });
+    const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
+    const config = { childList: true, subtree: true };
+    observer.observe(document.body, config);
 
 }
 

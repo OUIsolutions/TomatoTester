@@ -5,50 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/Element-404@main/versions/Element404_v0.5.js"></script>
+    <script #lib#></script>
 </head>
 <body>
-<script>
+    <script>
+    let container_target_div = undefined;
+
+    let min_input = undefined;
+    let max_input = undefined;
+    let difference_input = undefined;
+    let seed_input = undefined;
+    
+
+    function render_target_div(){
+        
+        container_target_div.clear();
+        let created_div = container_target_div.div(()=>{
+            for(let i = 0;i < 20; i++ ){
+                let div = container_target_div.div(()=>{
+
+                    let internal_div = container_target_div.div();
+                    internal_div.inline_style({
+                        'margin-left':'33%',
+                        'margin-top':'33%',
+                        'width':'30%',
+                        'height':'30%',
+                        'background-color':'blue'
+                    });
+
+                })
+                div.inline_style({
+                    'width':'20vh',
+                    'height':'20vh',
+                    'margin':'2vh',
+                    'background-color':'red',
+                })
+            }
+
+
+        })
+        created_div.inline_style({
+        display:'flex',
+        'flex-wrap':'wrap',
+        'width':'100%',
+        'height':'100%',
+        })
+
+        container_target_div.inline_style({
+                    position:'absolute',
+                    top:'0px',
+                    left:'25%',
+                    width:'75%',
+                    height:'100%',
+        })
+
+    }
+
+
+    function generate_colors(){ 
+        render_target_div();
+        let props = {
+            min_rgb:parseInt(min_input.domElement.value),
+            max_rgb:parseInt(max_input.domElement.value),
+            min_difference:parseInt(difference_input.domElement.value),
+            target:container_target_div.domElement,
+            seed:seed_input.domElement.value
+        }
+        tomato_start(props)
+    }
+
 
     function main(){
         let target = document.body;
         let element = createElement404((main_interface)=>{
-            main_interface.div(()=>{
+            let choices = main_interface.div(()=>{
 
                 let p_style ={
                     color:'gray'
                 }
                 
-                let min_rgb_text = main_interface.p("Min Rgb: 0",{inline_style:p_style});
-                let min_input = main_interface.input({type:"range",min:0,max:255,value:0,step:1});
+                let min_rgb_text = main_interface.p("Min Rgb: "+TOMATO_MIN_RGB,{inline_style:p_style});
+                min_input = main_interface.input({type:"range",min:0,max:255,value:TOMATO_MIN_RGB,step:1});
                 min_input.set_prop('input',(e)=>{
                             min_rgb_text.domElement.innerHTML = "Min Rgb: "+e.value
+                            generate_colors();
                 });
-                let max_rgb_text = main_interface.p("Max Rgb: 255",{inline_style:p_style});
-                let max_input = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
+                let max_rgb_text = main_interface.p("Max Rgb: " + TOMATO_MAX_RGB,{inline_style:p_style});
+                max_input = main_interface.input({type:"range",min:0,max:255,value:TOMATO_MAX_RGB,step:1});
                 max_input.set_prop('input',(e)=>{
-                            max_rgb_text.domElement.innerHTML = "Max Rgb: "+e.value
+                            max_rgb_text.domElement.innerHTML = "Max Rgb: "+e.value;
+                            generate_colors();
                 });
 
 
-                let diference_text = main_interface.p("Differece: 0",{inline_style:p_style});
-                let difference_input  = main_interface.input({type:"range",min:0,max:255,value:255,step:1});
+                let diference_text = main_interface.p("Min Differece: " + TOMATO_MIN_DIFFERENCE,{inline_style:p_style});
+                difference_input  = main_interface.input({type:"range",min:0,max:255,value:TOMATO_MIN_DIFFERENCE,step:1});
                 difference_input.set_prop('input',(e)=>{
-                            diference_text.domElement.innerHTML = "Difference: "+e.value
+                            diference_text.domElement.innerHTML = "Min Differece: "+e.value
+                            generate_colors();
                 });
                 main_interface.p("Seed",{inline_style:p_style});
-                let seed_input = main_interface.input({type:"text",value:"hello my cold friend"});
+                seed_input = main_interface.input({type:"text",value:TOMATO_DEFAULT_SEED});
+                seed_input.set_prop('change',(e)=>{
+                    generate_colors();
+                });
  
             })
-            
+            choices.inline_style({
+                position:'absolute',
+                top:'0px',
+                left:'5%',
+                width:'25%',
+                height:'100%',
+            })
 
+            container_target_div = main_interface.div();
+            
 
         },target)
 
         element.render()
+        
+        generate_colors();
+
+
     }
 
     window.addEventListener('load',main);
-</script>
+    </script>
+
 
 </body>
 </html>

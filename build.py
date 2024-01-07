@@ -4,14 +4,15 @@ from shutil import rmtree
 from os import makedirs
 
 SOURCES = [
-    'src/globals.js',
+    'src/default_props.js',
+    'src/props_constructor.js',
     'src/procedural_construction.js',
     'src/generation.js',
 ]
 
 LIB_NAME = 'TomatoTestter'
 REPO_NAME = 'OUIsolutions/TomatoTestter'
-
+BRANCH = 'creating-props'
 
 def create_output():
     output = ''
@@ -31,7 +32,7 @@ def create_output():
 
 output_name = create_output()
 #replacing html links 
-link = f'https://cdn.jsdelivr.net/gh/{REPO_NAME}@main/{output_name}'
+link = f'https://cdn.jsdelivr.net/gh/{REPO_NAME}@{BRANCH}/{output_name}'
 div = f'src="{link}"'
 
 

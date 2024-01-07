@@ -6,16 +6,17 @@
     <title>Modifying Generation</title>
     <script #lib#></script>
     <script>
-        let my_seed = 'hello my cold friend'
-        //determine min rgb level of each of the 3 colors
-        tomato_min_rgb = 0;
-        //determine max rgb level of each of the 3 colors
-        tomato_max_rgb = 255;
 
-        //determine min difference between 2 colors
-        tomato_minimum_difference = 70;
-        
-        tomato_start(my_seed)
+        let props = {
+            min_rgb:20,
+            max_rgb:255,
+            min_difference:0,
+            target: ()=>document.body,
+            seed:"Hello my Cold Friend"
+        }
+
+        tomato_start(props)
+
     </script>
     <style>
         .container{

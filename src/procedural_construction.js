@@ -1,32 +1,34 @@
 
 
 /**
- * @param {number} seed
+ * @param {TomatoProps} props
+ * @param {TomatoGenerationProps} generation
  * @param {number} current_color
  * @return {number}
  */
-function tomato_get_rgb_number(seed,current_color){
+function tomato_get_rgb_number(props,generation,current_color){
 
-    let multiplication =  seed * (current_color +1) * tomato_total_generations;
-    let pseudo_random_rgb = (multiplication % (tomato_max_rgb - tomato_min_rgb)) + tomato_min_rgb;
 
-    if(!tomato_last_generation){
+    let multiplication =  props.numerical_seed * (current_color +1) * generation.total_generations;
+    let pseudo_random_rgb = (multiplication % (props.max_rgb - props.min_rgb)) + props.min_rgb;
+
+    if(!generation.last_generation){
         return pseudo_random_rgb;
     }
-    let last_rgb = tomato_last_generation[current_color];
+
+    let last_rgb = generation.last_generation[current_color];
+
 
     let MAX_TRYS = 100;
     for(let i =1; i < MAX_TRYS;i++){
 
         let difference = Math.abs(pseudo_random_rgb - last_rgb);
 
-        if(difference > tomato_minimum_difference){
+        if(difference > props.min_difference){
             break;
         }
-        multiplication =  seed * (current_color +1 + i) * tomato_total_generations;
-        pseudo_random_rgb = (multiplication % (tomato_max_rgb - tomato_min_rgb)) + tomato_min_rgb;
-
-
+        multiplication =  props.numerical_seed * (current_color +1 + i) * generation.total_generations;
+        pseudo_random_rgb = (multiplication % (props.max_rgb - props.min_rgb)) + props.min_rgb;
 
     }
 
@@ -43,18 +45,14 @@ function tomato_get_rgb_number(seed,current_color){
 function tomato_create_tomato_num_seed(seed){
     let chars =  seed.split('');
     let result = 1;
-    const ONE_MILLION_LIMIT = 1000000;
 
     chars.forEach(char => {
         let ascci_value = char.charCodeAt(0);
-        result = (result * ascci_value) + 1;
-
-        if(result > ONE_MILLION_LIMIT){
-            result = result % ONE_MILLION_LIMIT;
-        }
-
+        let mul_result = ascci_value * ascci_value;
+        result = (result + mul_result);
+    
     });
-
+    console.log('tomato_create_tomato_num_seed',result);
     return result;
 
 }
