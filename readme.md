@@ -10,7 +10,7 @@ for run, you just need to pass the cdn script tag into your project
 and them call the **tomato_start** function , with an seed
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@creating-props/versions/TomatoTestter_v0.960.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@creating-props/versions/TomatoTestter_v0.961.js"></script>
 <script>
 
     tomato_start()
@@ -26,7 +26,7 @@ and them call the **tomato_start** function , with an seed
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Generation</title>
-    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@creating-props/versions/TomatoTestter_v0.960.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@creating-props/versions/TomatoTestter_v0.961.js"></script>
     <script>tomato_start() </script>
     <style>
         .container{
@@ -78,7 +78,7 @@ with
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifying Generation</title>
-    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@creating-props/versions/TomatoTestter_v0.960.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/OUIsolutions/TomatoTestter@creating-props/versions/TomatoTestter_v0.961.js"></script>
     <script>
 
         let props = {
