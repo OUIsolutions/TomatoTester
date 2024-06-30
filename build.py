@@ -4,10 +4,12 @@ from shutil import rmtree
 from os import makedirs
 
 SOURCES = [
-    'src/default_props.js',
-    'src/props_constructor.js',
-    'src/procedural_construction.js',
+    'src/algo.js',
+    'src/constants.js',
     'src/generation.js',
+    'src/procedural_construction.js',
+    'src/props_constructor.js',
+    'src/start.js',
 ]
 
 LIB_NAME = 'TomatoTestter'

@@ -5,11 +5,32 @@
  * @property {string} color
  */
 
+
+
 /**
  * @typedef {object} TomatoGenerationProps
  * @property {number} total_generations
- * @property {Array<number>} last_generation
+ * @property {Array<Array<number>>}already_generated
+ * @return {Array<Array<number>>}
  * */
+
+
+function generate_list_of_elements(props,generation){
+    let all_generations = []
+    for(let i = 0; i < TOTA_GENERATIONS; i++){
+        generation.total_generations+=1;
+
+        let red =  tomato_get_rgb_number(props,generation,10);
+        let green = tomato_get_rgb_number(props,generation,20);
+        let blue =  tomato_get_rgb_number(props,generation,30);
+        let current_generation = [red,green,blue];
+        all_generations.push(current_generation)
+
+    }
+    return all_generations
+}
+
+
 
 /**
  * @param {TomatoProps} props
@@ -17,13 +38,16 @@
  * @return  {TomatoPseudoRamdomColors}*/
 function tomato_generate_pseudo_random_colors(props,generation){
     //determine Math seed
-    generation.total_generations+=1;
 
-    let red =  tomato_get_rgb_number(props,generation,0);
-    let green = tomato_get_rgb_number(props,generation,1);
-    let blue =  tomato_get_rgb_number(props,generation,2);
+    let all_generations =generate_list_of_elements(props,generation)
 
-    generation.last_generation = [red,green,blue];
+    let formatted_with_max = construct_lowest_similarity(generation.already_generated,all_generations)
+    let current_generation = get_max_similarity_rgb(formatted_with_max)
+    generation.already_generated.push(current_generation)
+    let red =  current_generation[0]
+    let green = current_generation[1]
+    let blue = current_generation[2]
+
 
     let color = 'black';
     if(red + green + blue < 300){
@@ -62,83 +86,4 @@ function tomato_process_elements(props,generation){
 
 
 
-/**
- * @param {TomatoProps} props
- * */
-function tomato_start(props=undefined){
 
-    let formatted_props = tomato_construct_props(props);
-
-    formatted_props.numerical_seed = tomato_create_tomato_num_seed(formatted_props.seed);
-    /**@type {TomatoGenerationProps}*/
-    let generation_props = {
-        total_generations:0,
-        last_generation:undefined
-    };
-
-
-    if(!formatted_props.target){
-        formatted_props.target = ()=>document.body;
-    }
-
-
-
-    function internal_starter(){
-        tomato_process_elements(formatted_props,generation_props);
-        const observer = new MutationObserver( ()=>tomato_process_elements(formatted_props,generation_props));
-        const config = { childList: true, subtree: true };
-        observer.observe(document.body, config);
-    }
-    let target = undefined;
-
-
-    //first we try to executate an normal function
-    if(formatted_props.target instanceof  Function) {
-        try{
-            target= formatted_props.target();
-        }
-        catch(e){}
-    }
-
-    if(target){
-        formatted_props.target = target;
-    }
-
-    let still_target_a_function = formatted_props.target instanceof  Function;
-
-    if(!still_target_a_function){
-        internal_starter();
-        return;
-    }
-
-    if(still_target_a_function){
-        let max_tries = 50;
-        let interval = setInterval(()=>{
-
-            try{
-                target= formatted_props.target();
-            }
-            catch(e){
-                console.log(e);
-                clearInterval(interval);
-            }
-
-
-            if(target){
-                formatted_props.target = target;
-                internal_starter();
-                clearInterval(interval);
-            }
-
-            max_tries--;
-            if(max_tries < 0){
-                clearInterval(interval);
-                console.log('Tomato could not find the target element');
-            }
-
-        },100);
-
-    }
-
-
-}
