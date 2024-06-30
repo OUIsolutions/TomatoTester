@@ -8,9 +8,16 @@
  */
 function tomato_get_rgb_number(props,generation,current_color){
 
+    while(true){
+        let multiplication =  (props.numerical_seed * current_color) * (generation.total_generations *100);
+        generation.total_generations+=1;
+        let result = multiplication % props.max_rgb
+        if(result > props.min_rgb){
+            return result;
+        }
+    }
 
-    let multiplication =  props.numerical_seed * (current_color ) * generation.total_generations;
-    return (multiplication % (props.max_rgb - props.min_rgb)) + props.min_rgb;
+
 
 }
 
@@ -22,13 +29,16 @@ function tomato_get_rgb_number(props,generation,current_color){
 function tomato_create_tomato_num_seed(seed){
     let chars =  seed.split('');
     let result = 1;
-
+    const MAX_VALUE = 10000000000000;
     chars.forEach(char => {
-        let ascci_value = char.charCodeAt(0);
-        let mul_result = ascci_value * ascci_value;
-        result = (result + mul_result);
-
+        let ascci_value = char.charCodeAt(0) *100;
+        result = (result * ascci_value);
+        while(result > MAX_VALUE){
+            result -= parseInt(result/100)
+        }
     });
+
+
     return result;
 
 }
